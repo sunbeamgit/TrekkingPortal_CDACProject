@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+//import { Navigate, useNavigate } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 function AgencySignUp() {
     const [formdata,setFormdata] =useState({
@@ -12,6 +14,8 @@ function AgencySignUp() {
   const [city,setCity]=useState();
   const [state,setState]=useState();
   const [country,setCountry]=useState();
+  //const navigate= useNavigate();
+  const history = useHistory();
   const [serverresp,setserverresp] = useState(false);
   
   const handleChange = (e)=>{
@@ -53,8 +57,12 @@ function AgencySignUp() {
     console.log("Inside handle submit");
     console.log(formdata);
     axios.post("http://localhost:7070/agency/register",formdata)
-    .then((response)=>{setserverresp(response.data.agencyName)})
+    .then((response)=>{setserverresp(response.data.status)})
     .catch((error=>{console.log(error)}))
+
+    if(serverresp){
+      history.push("/login");
+    }
   }
 
   return (

@@ -30,6 +30,10 @@ function Navbar() {
             <li class="nav-item">
                 <Link to="/contactus" className="nav-link">Contact Us</Link>
             </li>
+
+            <li class="nav-item">
+                <Link to="/login" className="nav-link">Login</Link>
+            </li>
             
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

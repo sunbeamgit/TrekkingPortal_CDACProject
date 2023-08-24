@@ -76,7 +76,15 @@ public class AgencyServiceImpl implements AgencyService {
         agencyToAdd.setState(state);
         agencyToAdd.setCountry(country);
         Agency persistentAgency = agencyRepo.save(agencyToAdd);
-        return mapper.map(persistentAgency, SignUpResponse.class);
+        //return mapper.map(persistentAgency, SignUpResponse.class);
+        SignUpResponse signupresp = new SignUpResponse();
+        if(persistentAgency!= null) {
+        	signupresp.setStatus(true);
+        }
+        else {
+        	signupresp.setStatus(false);
+        }
+        return signupresp;
     }
 
     @Override
