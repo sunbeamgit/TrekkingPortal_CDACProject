@@ -14,7 +14,6 @@ import com.app.dao.TrekDetailsRepository;
 import com.app.dto.AddPackageRequest;
 import com.app.dto.AddPackageResponse;
 import com.app.dto.AgencyListResponse;
-import com.app.dto.ApiResponse;
 import com.app.dto.GetPackageResponse;
 import com.app.dto.GetTrekNameResponse;
 import com.app.dto.SignInRequest;

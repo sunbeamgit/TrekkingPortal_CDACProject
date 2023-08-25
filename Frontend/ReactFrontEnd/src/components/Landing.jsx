@@ -3,15 +3,13 @@ import Header from './Header';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
-
 function Landing() {
   return (
     <div className='main-container'>
-      <Header />
+      <Header/>
       <Navbar></Navbar>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
-
 export default Landing;

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dao.AdminRepository;
 import com.app.dao.AirportRepository;
 import com.app.dao.GradeRepository;
@@ -18,6 +19,9 @@ import com.app.dao.SeasonRepository;
 import com.app.dao.TrekDetailsRepository;
 import com.app.dto.AddTrekRequest;
 import com.app.dto.AddTrekResponse;
+import com.app.dto.AdminSignInRequest;
+import com.app.dto.AdminSignInResponse;
+import com.app.pojos.Admin;
 import com.app.pojos.Airport;
 import com.app.pojos.Grade;
 import com.app.pojos.RailwayStation;
@@ -51,6 +55,7 @@ public class AdminServiceImpl implements AdminService{
     @Value("${upload.location}")
 	private String folderLocation;
     
+    
 	@PostConstruct
 	public void init() {
 		System.out.println("in init " + folderLocation);
@@ -64,22 +69,30 @@ public class AdminServiceImpl implements AdminService{
 		}
 
 	}
-    
+	  
+	@Override
+	public AdminSignInResponse singInAdmin(AdminSignInRequest adminDTO) {
+		Admin admin = 
+		adminRepo.findByEmailAndPassword(adminDTO.getEmail(),adminDTO.getPassword()).
+		orElseThrow(()->new ResourceNotFoundException("Invalid Email and Password"));
+		return mapper.map(admin, AdminSignInResponse.class);
+	}
+
 	@Override
 	public AddTrekResponse addTrekDetails(AddTrekRequest addtrekDTO, MultipartFile imageFile) throws IOException {
 		System.out.println("inside add trek sevice");
 		
-	    Airport airport = airportRepo.findByAirportName(addtrekDTO.getAirport().getAirportName());
-	    addtrekDTO.setAirport(airport);
-
-	    RailwayStation station = railwaystationRepo.findByRailwaystationName(addtrekDTO.getRailwayStation().getRailwaystationName());
-	    addtrekDTO.setRailwayStation(station);
-
-	    Season season = seasonRepo.findBySeasonName(addtrekDTO.getSeason().getSeasonName());
-	    addtrekDTO.setSeason(season);
-
-	    Grade grade = gradeRepo.findByGradeCategory(addtrekDTO.getGrade().getGradeCategory());
-	    addtrekDTO.setGrade(grade);
+	    Airport airport = airportRepo.findByAirportName(addtrekDTO.getAirportName());
+	    RailwayStation station = railwaystationRepo.findByRailwaystationName(addtrekDTO.getRailwayStationName());
+	    Season season = seasonRepo.findBySeasonName(addtrekDTO.getSeasonName());
+	    Grade grade = gradeRepo.findByGradeCategory(addtrekDTO.getGradeCategory());
+	   
+	    TrekDetails newTrek = new TrekDetails();
+	    mapper.map(addtrekDTO, newTrek);
+	    newTrek.setAirport(airport);
+	    newTrek.setRailwayStation(station);
+	    newTrek.setSeason(season);
+	    newTrek.setGrade(grade);
         
 	    // save uploaded file contents in server side folder.
 	    // create the path to store the file
@@ -91,8 +104,16 @@ public class AdminServiceImpl implements AdminService{
 	 	FileUtils.writeByteArrayToFile(new File(path), imageFile.getBytes());
 	 	// file saved successfully !
 	 	// set image path in db
-	 	addtrekDTO.setImagePath(path);
-	 	TrekDetails persistentTrek = trekDetailsRepo.save(mapper.map(addtrekDTO, TrekDetails.class));
-	 	return mapper.map(persistentTrek, AddTrekResponse.class);
+	 	newTrek.setImagePath(path);
+	 	
+	 	TrekDetails persistentTrek = trekDetailsRepo.save(newTrek);
+	 	AddTrekResponse addtrekresp = new AddTrekResponse();
+	        if(persistentTrek!= null) {
+	        	addtrekresp.setStatus(true);
+	        }
+	        else {
+	        	addtrekresp.setStatus(false);
+	        }
+	    return addtrekresp;
 	}
 }

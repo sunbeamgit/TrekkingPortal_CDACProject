@@ -19,5 +19,6 @@ public class GetPartialTrekResponse {
 	private String railwayStation;
 	private String season;
 	private String grade;
-	private byte[] image;
+	//private byte[] image;
+	//private String image;
 }

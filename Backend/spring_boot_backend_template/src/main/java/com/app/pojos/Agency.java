@@ -21,7 +21,7 @@ public class Agency extends BaseEntity{
 	@Column(name="agency_owner" ,length=30)
 	private String agencyOwner;
 	
-	@Column(length = 20, unique = true)
+	@Column(length = 40, unique = true)
 	private String email;
 	
 	@Column(length = 50)
