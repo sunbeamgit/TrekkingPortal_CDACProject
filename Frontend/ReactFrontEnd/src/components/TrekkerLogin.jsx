@@ -1,12 +1,10 @@
-//import { useHistory } from 'react-router-dom';
-
-//import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import { useState } from 'react';
-//import Test from './Test' 
+//import Test from './Test'
+import { useHistory } from 'react-router-dom'; 
 
-function Login()
+function TrekkerLogin()
 {
-    //var history = useHistory();
+     const history = useHistory();
  
      const [credentials, setCredentials] =
             useState({email:"", password:""});
@@ -39,7 +37,7 @@ function Login()
                     window.sessionStorage.setItem("email" , credentials.email);
                     ShowMessage("Successfull.........!");
                     //navigate to somewhere
-                   // history.push("/Test")
+                history.push("/HomePage")
                   }
                   else
                   {
@@ -50,7 +48,7 @@ function Login()
       }
       
       helper.open("POST", 
-                   "http://127.0.0.1:5000/login");
+                   "http://127.0.0.1:5000/signin");
       helper.setRequestHeader("content-type","application/json");
       //debugger;
 
@@ -97,4 +95,4 @@ function Login()
   </div>);
 }
 
-export default Login;
+export default TrekkerLogin;

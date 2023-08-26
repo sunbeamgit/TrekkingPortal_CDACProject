@@ -13,8 +13,22 @@
   }
 }
 
+.background-image1 {
+  background-image: url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/14.jpg'); /* Replace with your image path */
+  background-size: cover; /* Adjust how the image covers the element */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  /* Additional properties for positioning the background if needed */
+}
+
+.background-image2 {
+  background-image: url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/a.jpg'); /* Replace with your image path */
+  background-size: cover; /* Adjust how the image covers the element */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  /* Additional properties for positioning the background if needed */
+}
+
 .App-header {
-  background-color: #282c34;
+  background-color: #3d4451;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,6 +38,144 @@
   color: white;
 }
 
+.nav-color{
+  background-color: #ffc7c7;
+}
+
+.my-div {
+  width: 90%;
+  height: 200px;
+  background-color: #f2faaa;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.my-table {
+  width: 950px;
+  height: 300px;
+  border-collapse: collapse;
+  border: 1px solid #f7fcb4;
+  align-items: center;
+}
+
+.my-image1 {
+  width: 40px;
+  height: 40px;
+  border-collapse: collapse;
+  border: 1px solid #fcfcfc;
+  align-items: center;
+}
+
+.my-image2 {
+  width: 100px;
+  height: 100px;
+  border-collapse: collapse;
+  border: 1px solid #e60000;
+  align-items: center;
+}
+
+.my-table1 {
+  width: 950px;
+  height: 300px;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  align-items: center;
+  background-color: #e1e1e1;
+}
+
+.div-imagepng{
+  width: 70px;
+  height: 70px;
+  border-collapse: separate;
+  border: 1px solid #ffffff;
+  
+}
+
+.div-imagepngteam {
+  width: 200px;
+  height: 200px;
+  border-collapse: separate;
+  border: 1px solid #ffffff;
+  border-radius: 50%; /* Make the div circular */
+  overflow: hidden; /* Clip the content that exceeds the circular shape */
+}
+
+.my-div1{
+  width: 70%;
+  height: 360px;
+  background-color: #f68c8c;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.redish-heading {
+  color: #cf2102; /* Reddish color code */
+  font-size: 24px; /* Adjust the font size as needed */
+  font-weight: bold;
+}
+
+.main-heading {
+  color: #cf2102; /* Reddish color code */
+  font-size: 32px; /* Adjust the font size as needed */
+  font-weight: bold;
+}
+.sub-heading{
+  color: #bf1d00; /* Reddish color code */
+  font-size: 18px; /* Adjust the font size as needed */
+  font-weight: bold;
+}
+
+/* Basic styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.footer {
+ 
+  background-color: #3498db; /* Footer background color */
+  color: white; /* Footer text color */
+  text-align: center;
+  
+}
+
+.parallelogram-footer {
+  flex-shrink: 0;
+  padding: 10px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #d9d9d9; /* Parallelogram background color */
+
+  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 70px);  /* Clip-path to create the shape */ }
+
+  .footer-heading{
+    color: #060606; /* Reddish color code */
+    font-size: 18px; /* Adjust the font size as needed */
+    font-weight: bold;
+  }
+
+.justify-paragraph {
+  text-align: justify;
+}
 .App-link {
   color: #61dafb;
 }

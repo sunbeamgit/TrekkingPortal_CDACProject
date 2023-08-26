@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,21 +34,18 @@ public class AgencyController {
     private AgencyService agencyService;
 
     public AgencyController() {
-        // Print a message to the console when an instance of the controller is created
         System.out.println("in ctor of " + getClass());
     }
 
-    // Endpoint for adding agency details using POST method
+    //Add New Agency
     @PostMapping("/register")
     public ResponseEntity<?> addNewAgency(@RequestBody SignUpRequest agencyDTO) {
-        System.out.println("in add new agency " + agencyDTO);
-        
-        // Call the service to add agency details
         return ResponseEntity.
         		status(HttpStatus.CREATED).
         	    body(agencyService.addAgencyDetails(agencyDTO));
     }
     
+    //Agency Sign In
     @PostMapping("/signin")
 	public ResponseEntity<?> signInAgency(@RequestBody @Valid SignInRequest agencyDTO) {
 		System.out.println("auth req " + agencyDTO);
@@ -58,43 +53,49 @@ public class AgencyController {
 		return ResponseEntity.ok(resp);
 	}
     
+    //List All Agencies
     @GetMapping("/listagency")
     public ResponseEntity<?> listAllAgency() {
         List<AgencyListResponse> agencies = agencyService.getAllAgency();
         return ResponseEntity.ok(agencies);
     }
     
+    //List All Guides
     @GetMapping("/listguide")
     public ResponseEntity<?> listAllGuide() {
         List<Guide> agencies = agencyService.getAllGuide();
         return ResponseEntity.ok(agencies);
     }
     
+    //Returning All TrekNames and ID's
     @GetMapping("/gettrekname")
     public ResponseEntity<?> listTrekName() {
         List<GetTrekNameResponse> trekNames = agencyService.getTrekName();
         return ResponseEntity.ok(trekNames);
     }
     
+    //Add new package
     @PostMapping("/addpackage")
     public ResponseEntity<?> addPackage(@RequestBody AddPackageRequest addPackageDTO){
-    	//Call the service to add package details
         return ResponseEntity.
         		status(HttpStatus.CREATED).
         	    body(agencyService.addPackageDetails(addPackageDTO));
     }
     
+    //Delete Package by Id
     @DeleteMapping("deletepackage/{packageId}")
     public ApiResponse deletePackage(@PathVariable Long packageId) {
 		System.out.println("in delete emp details " + packageId);
 		return new ApiResponse(agencyService.deletePackageDetails(packageId));
 	}
     
+    //Get Package Details By Id
     @GetMapping("getpackage/{packageId}")
     public GetPackageResponse getPackageDetails(@PathVariable Long packageId) {
     	return agencyService.getPackageById(packageId);
     }
     
+    //Update Package of Id received from frontend
     @PutMapping("updatepackage/{packageId}")
     public ApiResponse updatePackage(@RequestBody UpdatePackageRequest packageDTO,
     								 @PathVariable Long packageId) {

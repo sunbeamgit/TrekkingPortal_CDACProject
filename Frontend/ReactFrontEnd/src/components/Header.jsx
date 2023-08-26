@@ -1,5 +1,5 @@
 import React from 'react';
-import logoImage from '../images/logo1.png';
+import logoImage from '../images/logo-png.png';
 
 function Header() {
   return (
@@ -7,7 +7,7 @@ function Header() {
       <img
         src={logoImage} 
         alt="Logo"
-        style={{ width: '150px', height: 'auto' }} 
+        style={{ width: '170px', height: '50px' }} 
       />
     </div>
   );

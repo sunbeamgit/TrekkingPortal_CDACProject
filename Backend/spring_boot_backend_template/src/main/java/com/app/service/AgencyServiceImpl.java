@@ -14,7 +14,6 @@ import com.app.dao.TrekDetailsRepository;
 import com.app.dto.AddPackageRequest;
 import com.app.dto.AddPackageResponse;
 import com.app.dto.AgencyListResponse;
-import com.app.dto.ApiResponse;
 import com.app.dto.GetPackageResponse;
 import com.app.dto.GetTrekNameResponse;
 import com.app.dto.SignInRequest;
@@ -76,7 +75,15 @@ public class AgencyServiceImpl implements AgencyService {
         agencyToAdd.setState(state);
         agencyToAdd.setCountry(country);
         Agency persistentAgency = agencyRepo.save(agencyToAdd);
-        return mapper.map(persistentAgency, SignUpResponse.class);
+        //return mapper.map(persistentAgency, SignUpResponse.class);
+        SignUpResponse signupresp = new SignUpResponse();
+        if(persistentAgency!= null) {
+        	signupresp.setStatus(true);
+        }
+        else {
+        	signupresp.setStatus(false);
+        }
+        return signupresp;
     }
 
     @Override
