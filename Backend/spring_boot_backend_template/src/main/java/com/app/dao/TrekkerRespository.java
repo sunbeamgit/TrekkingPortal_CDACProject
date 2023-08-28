@@ -8,6 +8,5 @@ import com.app.pojos.Trekker;
 
 public interface TrekkerRespository extends JpaRepository<Trekker, Long>{
 	Optional<Trekker> findByEmailAndPassword(String em,String pass);
-	
-
+	Trekker findByEmail(String email);	
 }

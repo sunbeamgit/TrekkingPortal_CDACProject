@@ -13,6 +13,8 @@ import com.app.dto.SignInResponse;
 import com.app.dto.SignUpRequest;
 import com.app.dto.SignUpResponse;
 import com.app.dto.UpdatePackageRequest;
+import com.app.dto.UpdatePackageResponse;
+import com.app.dto.ViewPackageForNameDTO;
 import com.app.pojos.Guide;
 
 
@@ -42,5 +44,8 @@ public interface AgencyService {
 	GetPackageResponse getPackageById(Long packageId);
 	
 	//update package
-	String updatePackageDetails(UpdatePackageRequest packageDTO,Long packageId);
+	UpdatePackageResponse updatePackageDetails(UpdatePackageRequest packageDTO,Long packageId);
+	
+	//View Packages
+	List<ViewPackageForNameDTO> getAllPackageByName();
 }

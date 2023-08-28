@@ -9,11 +9,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AuthResp {
-
-	
-	private String firstname;
-	private String lastname;
+public class TrekkerSigninResp {
+	private String email;
 	
 }
 

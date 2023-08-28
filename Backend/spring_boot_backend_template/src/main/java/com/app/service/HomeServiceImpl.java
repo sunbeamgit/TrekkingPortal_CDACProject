@@ -14,32 +14,45 @@ import com.app.dao.AirportRepository;
 import com.app.dao.CityRepository;
 import com.app.dao.CountryRepository;
 import com.app.dao.GradeRepository;
+import com.app.dao.GuideRepository;
+import com.app.dao.PackageRepository;
 import com.app.dao.RailwayStationRepository;
 import com.app.dao.SeasonRepository;
 import com.app.dao.StateRepository;
 import com.app.dao.TrekDetailsRepository;
+import com.app.dao.TrekPackageRepository;
 import com.app.dto.GetAirportResponse;
+import com.app.dto.GetAllPackageResponse;
 import com.app.dto.GetCityResponse;
 import com.app.dto.GetCountryResponse;
 import com.app.dto.GetGradeResponse;
+import com.app.dto.GetGuideResponse;
 import com.app.dto.GetPartialTrekResponse;
 import com.app.dto.GetSeasonResponse;
 import com.app.dto.GetStateResponse;
 import com.app.dto.GetStationResponse;
+import com.app.dto.GetTrekImageResponse;
+import com.app.dto.GetTrekNameResponse;
+import com.app.dto.ViewPackageForNameDTO;
 import com.app.pojos.Airport;
 import com.app.pojos.City;
 import com.app.pojos.Country;
 import com.app.pojos.Grade;
+import com.app.pojos.Guide;
 import com.app.pojos.RailwayStation;
 import com.app.pojos.Season;
 import com.app.pojos.State;
 import com.app.pojos.TrekDetails;
+import com.app.pojos.TrekPackage;
 
 @Service
 @Transactional
 public class HomeServiceImpl implements HomeService{
 	@Autowired
     private TrekDetailsRepository trekDetailsRepo;
+	
+	@Autowired
+	private TrekPackageRepository packageDetailsRepo;
 	
     @Autowired
     private ModelMapper mapper;
@@ -65,6 +78,12 @@ public class HomeServiceImpl implements HomeService{
     @Autowired 
     private GradeRepository gradeRepo;
     
+    @Autowired 
+    private GuideRepository guideRepo;
+    
+    @Autowired
+	private PackageRepository packageRepo;
+    
     @Override
     public List<GetPartialTrekResponse> getPartialTrekDetails() throws IOException {
         List<TrekDetails> trekDetails = trekDetailsRepo.findAll();
@@ -80,7 +99,28 @@ public class HomeServiceImpl implements HomeService{
             .collect(Collectors.toList());
     }
     
-    @Override
+	@Override
+	public List<GetAllPackageResponse> getAllPackageDetails() throws IOException{
+		List<TrekPackage> packageDetails = packageDetailsRepo.findAll();
+		return packageDetails.stream()
+				.map(trekpackage->{
+					GetAllPackageResponse response = mapper.map(trekpackage, GetAllPackageResponse.class);
+					response.setLocation(trekpackage.getTrekDetails().getLocation());
+					response.setDistance(trekpackage.getTrekDetails().getTrekKilometer());
+					response.setAltitude(trekpackage.getTrekDetails().getMaxAltitude());
+					response.setGrade(trekpackage.getTrekDetails().getGrade().getGradeCategory());
+					String imagePath = trekpackage.getTrekDetails().getImagePath();
+					try {
+						response.setPackageImage(FileUtils.readFileToByteArray(new File(imagePath)));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					return response;
+				})
+				.collect(Collectors.toList());	
+	}
+	
+	@Override
     public List<byte[]> downloadTrekImage() {
         List<TrekDetails> trekDetails = trekDetailsRepo.findAll();
         List<byte[]> images = new ArrayList<>();
@@ -181,5 +221,40 @@ public class HomeServiceImpl implements HomeService{
 		    }
 		    resp.setGradeName(gradeNames);
 		 return resp;	
+	}
+	
+	//Harshda
+	@Override
+	public List<ViewPackageForNameDTO> getPackageByName() {
+		List<TrekPackage> trekPackage = packageRepo.findAll();
+		return trekPackage.stream().map(trekpackage ->{
+			ViewPackageForNameDTO response = mapper.map(trekpackage, ViewPackageForNameDTO.class);
+			response.setPackageName(trekpackage.getPackageName());
+			return response;
+		})
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<GetGuideResponse> getGuideName() {
+		List<Guide> guideByName = guideRepo.findAll();
+		return guideByName.stream().map(guide ->{
+			GetGuideResponse response = mapper.map(guide, GetGuideResponse.class);
+			response.setGuideName(guide.getGuideName());
+			return response;
+		})
+				.collect(Collectors.toList());
+	}
+	
+
+	@Override
+	public List<GetTrekNameResponse> getTrekbyName() {
+		List<TrekDetails> trekByName = trekDetailsRepo.findAll();
+		return trekByName.stream().map(trek -> {
+			GetTrekNameResponse response = mapper.map(trek,GetTrekNameResponse.class);
+			response.setTrekName(trek.getTrekName());
+			return response;
+		})
+				.collect(Collectors.toList());
 	}
 }

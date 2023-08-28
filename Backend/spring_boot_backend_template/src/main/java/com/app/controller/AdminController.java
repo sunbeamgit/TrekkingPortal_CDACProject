@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:3004")
+@CrossOrigin(origins = "http://localhost:3008")
 public class AdminController {
 	@Autowired
 	private AdminService adminService;

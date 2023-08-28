@@ -30,7 +30,7 @@ public class Trekker extends BaseEntity{
 	private String lastname;
 
 	@Email
-	@Column(name = "email", length = 20)
+	@Column(name = "email", length = 50,unique=true)
 	private String email;
 
 	@Column(length=25)

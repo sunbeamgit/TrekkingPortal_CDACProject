@@ -1,0 +1,19 @@
+/* navbar.css */
+.navbar-custom {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ccc; /* Add a bottom border for separation */
+}
+
+.navbar-custom .nav-link {
+  color: #d84f4f !important;
+  font-size: 18px; /* Adjust font size */
+  font-weight: bold; /* Add font weight */
+  padding: 10px 15px; /* Add padding to links */
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 1px; /* Add letter spacing */
+}
+
+.navbar-custom .nav-link:hover {
+  color: #0f0f0f !important;
+  background-color: #d84f4f; /* Change background on hover */
+}

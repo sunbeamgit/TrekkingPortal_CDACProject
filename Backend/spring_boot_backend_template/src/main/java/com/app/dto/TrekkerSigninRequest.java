@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AuthRequest {
+public class TrekkerSigninRequest {
 	@NotBlank(message = "Email must be supplied")
 //	@Length(min=4,max=20,message = "")
 		@Email(message = "Invalid Email")

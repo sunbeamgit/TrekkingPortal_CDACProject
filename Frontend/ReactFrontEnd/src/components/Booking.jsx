@@ -4,18 +4,17 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function Booking({ match }) {
-    debugger;
-        const { packageId } = useParams();
-        const [packageData, setPackageData] = useState({});
-        const [no, setNo] = useState(0); // Initialize 'no' state
-        const history = useHistory(); // Initialize useHistory
-        const packageDetailsId = match.params.id; // Use 'id' instead of 'packageDetailsId'
+    //debugger;
+    const { packageId } = useParams();
+    const [packageData, setPackageData] = useState({});
+    const [no, setNo] = useState(0); 
+    const history = useHistory();
+    const packageDetailsId = match.params.id; 
+    
     useEffect(() => {
-        debugger;
-      
-        // const [packageData, setPackageData] = useState({});
+        //debugger;
         axios
-          .post(`http://localhost:7070/trekker/viewDetails/${packageDetailsId}`)
+          .put(`http://localhost:7070/trekker/viewDetails/${packageDetailsId}`)
           .then(response => {
             setPackageData(response.data);
             console.log(response.data);
@@ -26,7 +25,7 @@ function Booking({ match }) {
       }, [packageId]);
 
       const handlingpayment=(payment) =>{
-        debugger
+        //debugger
         console.log(payment)
         console.log(no)
         history.push(`/paymentdetails/${payment}/${no}`);
@@ -36,25 +35,16 @@ function Booking({ match }) {
         setNo(event.target.value);
       }
      return (
-        <div align="center" className='background-image1' >
-            <div className="my-div">
-            <b><span style={{ color: 'red' }}>You Booked<br></br> (Trek Name) </span></b>:<br></br> {packageData.trekDetails?.trekName}<br></br><br></br>
-            <b><span style={{ color: 'red' }}>Cost Per Person</span> </b> :<br></br> {packageData?.priceperPerson}
-            </div>
-
-            <div className="my-div">
-              <p>Enter Nunber Of Participent :</p>
-            <input type='Number' id='no' value={no} onChange={handleNoChange} placeholder="Enter no of participant"></input>
-            </div>
-
-            <div className="my-div">
-            <button type="submit" className="btn btn-danger" onClick={() => handlingpayment(packageData?.priceperPerson)}>Proceed</button>
-            </div>
-                    
-    
-              
-        </div>
-      );
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div className="my-div" style={{ backgroundColor: 'rgba(255, 0, 0, 0.3)', padding: '20px', textAlign: 'center', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}>
+        <b><span style={{ color: 'red' }}>You Booked<br /></span></b><br /> {packageData.packageName}<br /><br />
+        <b><span style={{ color: 'red' }}>Cost Per Person</span></b>:<br /> ₹ {packageData?.priceperPerson}/person
+        <p>Enter Number Of Participants:</p>
+        <input type='number' id='no' value={no} onChange={handleNoChange} placeholder="Enter no of participants" style={{ padding: '5px', width: '100%', border: '1px solid #ccc', borderRadius: '5px' }} />
+        <button type="submit" className="btn btn-danger" onClick={() => handlingpayment(packageData?.priceperPerson)}>Proceed</button>
+      </div>
+    </div>
+    );
 }
 
 export default Booking;
