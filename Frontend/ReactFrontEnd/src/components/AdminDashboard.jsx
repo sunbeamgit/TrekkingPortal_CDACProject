@@ -17,6 +17,10 @@ function AdminDashboard() {
         <div style={divStyle}>
             <Link to="/deleteagency" className="nav-link">Delete Agency</Link>
         </div>
+
+        <div style={divStyle}>
+            <Link to="/alltreks" className="nav-link">Trek Details</Link>
+        </div>
     </div>
     );
 }

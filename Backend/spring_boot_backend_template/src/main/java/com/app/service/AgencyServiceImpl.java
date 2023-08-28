@@ -21,6 +21,8 @@ import com.app.dto.SignInResponse;
 import com.app.dto.SignUpRequest;
 import com.app.dto.SignUpResponse;
 import com.app.dto.UpdatePackageRequest;
+import com.app.dto.UpdatePackageResponse;
+import com.app.dto.ViewPackageForNameDTO;
 import com.app.enum_classes.ServiceType;
 import com.app.enum_classes.Status;
 import java.util.List;
@@ -177,7 +179,7 @@ public class AgencyServiceImpl implements AgencyService {
 	}
 
 	@Override
-	public String updatePackageDetails(UpdatePackageRequest packageDTO,Long packageId) {
+	public UpdatePackageResponse updatePackageDetails(UpdatePackageRequest packageDTO,Long packageId) {
 		TrekPackage trekPackage = packageRepo.findById(packageId)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Package ID !!!!!"));
 		
@@ -197,6 +199,17 @@ public class AgencyServiceImpl implements AgencyService {
 		trekPackage.setGuide(guide);
 		packageRepo.save(trekPackage);
 		trekPackage.setTrekDetails(trekDetails);
-		return "package updated succesfully";
+		return mapper.map(trekPackage, UpdatePackageResponse.class);
+	}
+	
+	@Override
+	public List<ViewPackageForNameDTO> getAllPackageByName(){
+		List<TrekPackage> packageDetails = packageRepo.findAll();
+		return packageDetails.stream()
+				.map(trekpackage->{
+					ViewPackageForNameDTO response = mapper.map(trekpackage, ViewPackageForNameDTO.class);
+					return response;
+				})
+				.collect(Collectors.toList());	
 	}
 }

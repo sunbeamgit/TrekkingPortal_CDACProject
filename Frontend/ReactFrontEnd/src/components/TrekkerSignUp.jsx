@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function TrekkerSignUp() {
     const [formdata,setFormdata] =useState({
@@ -14,6 +15,7 @@ function TrekkerSignUp() {
   const [city,setCity]=useState();
   const [state,setState]=useState();
   const [country,setCountry]=useState();
+  const history = useHistory();
   const [serverresp,setserverresp] = useState(false);
   
   const handleChange = (e)=>{
@@ -54,19 +56,22 @@ function TrekkerSignUp() {
   }, []);
 
   const handleSubmit=()=>{
-    console.log("Inside handle submit");
-    console.log(formdata);
+    console.log("Inside trekker handle submit");
     axios.post("http://localhost:7070/trekker/register",formdata)
-    .then((response)=>{setserverresp(response.data.firstname)})
+    .then((response)=>{setserverresp(response.data.status)})
     .catch((error=>{console.log(error)}))
+
+    if(serverresp){
+      history.push("/trekkerlogin");
+    }
   }
 
   return (
-    <div>
-      <form style={{width:"50%",left:"450px",boxShadow:"10px 10px 10px 5px grey",padding:"20px",marginTop:"10px"}}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <form style={{ width: '50%', boxShadow: '10px 10px 10px 5px grey', padding: '20px', marginTop: '10px' }}>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="inputfirstname">First Name</label>
+          <label htmlFor="inputfirstname" style={{ color: 'red', fontWeight: 'bold' }}>First Name</label>
             <input type="text" 
             className="form-control" 
             id="firstname"
@@ -78,7 +83,7 @@ function TrekkerSignUp() {
           </div>
 
           <div className="form-group col-md-6">
-            <label htmlFor="inputlastname">Last Name</label>
+            <label htmlFor="inputlastname" style={{ color: 'red', fontWeight: 'bold' }}>Last Name</label>
             <input type="text" 
             className="form-control" 
             id="lastname" 
@@ -90,7 +95,7 @@ function TrekkerSignUp() {
           </div>
         
           <div className="form-group col-md-6">
-            <label htmlFor="inputEmail4">Email</label>
+            <label htmlFor="inputEmail4" style={{ color: 'red', fontWeight: 'bold' }}>Email</label>
             <input type="email" 
             className="form-control" 
             id="email" 
@@ -102,7 +107,7 @@ function TrekkerSignUp() {
 
 
           <div className="form-group col-md-6">
-            <label htmlFor="inputbirthDate">DOB</label>
+            <label htmlFor="inputbirthDate" style={{ color: 'red', fontWeight: 'bold' }}>DOB</label>
             <input type="date" 
             className="form-control" 
             id="birthDate" 
@@ -113,7 +118,7 @@ function TrekkerSignUp() {
           </div>
 
           <div className="form-group col-md-6">
-            <label htmlFor="inputmobileno">Phone No.</label>
+            <label htmlFor="inputmobileno" style={{ color: 'red', fontWeight: 'bold' }}>Phone No.</label>
             <input type="number" 
             className="form-control" 
             id="mobileno" 
@@ -123,21 +128,9 @@ function TrekkerSignUp() {
             placeholder="Phone No." />
           </div>
 
-
-          {/* <div className="form-group col-md-6">
-            <label htmlFor="inputAltNo">Alternate No.</label>
-            <input type="number" 
-            className="form-control" 
-            id="altNo" 
-            name="altNo"
-            value={formdata.altNo} 
-            onChange={handleChange}
-            placeholder="Alternate No." />
-          </div> */}
-
           <div className="form-row">
             <div className="form-group col-md-4">
-            <label htmlFor="inputCity">City</label>
+            <label htmlFor="inputCity" style={{ color: 'red', fontWeight: 'bold' }}>City</label>
             <select
                 id="inputCity"
                 name="cityName"
@@ -153,7 +146,7 @@ function TrekkerSignUp() {
             </div>
 
             <div className="form-group col-md-4">
-            <label htmlFor="inputState">State</label>
+            <label htmlFor="inputState" style={{ color: 'red', fontWeight: 'bold' }}>State</label>
             <select
                 id="inputState"
                 name="stateName"
@@ -170,7 +163,7 @@ function TrekkerSignUp() {
 
 
             <div className="form-group col-md-4">
-            <label htmlFor="inputState">Country</label>
+            <label htmlFor="inputState" style={{ color: 'red', fontWeight: 'bold' }}>Country</label>
             <select
                 id="inputCountry"
                 name="countryName"
@@ -189,7 +182,7 @@ function TrekkerSignUp() {
 
 
          <div class="form-group">
-          <label for="inputGender">Gender</label>
+          <label for="inputGender" style={{ color: 'red', fontWeight: 'bold' }}>Gender</label>
   
           <select className="form-control"
             id="gender"
@@ -204,13 +197,8 @@ function TrekkerSignUp() {
           </select>
         </div>
 
-
-
-          
-
-
           <div className="form-group col-md-6">
-            <label htmlFor="inputPassword4">Password</label>
+            <label htmlFor="inputPassword4" style={{ color: 'red', fontWeight: 'bold' }}>Password</label>
             <input type="password" 
             className="form-control"
             id="password" 

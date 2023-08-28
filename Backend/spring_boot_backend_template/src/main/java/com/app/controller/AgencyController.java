@@ -9,6 +9,7 @@ import com.app.dto.SignInRequest;
 import com.app.dto.SignInResponse;
 import com.app.dto.SignUpRequest;
 import com.app.dto.UpdatePackageRequest;
+import com.app.dto.ViewPackageForNameDTO;
 import com.app.pojos.Guide;
 import com.app.service.AgencyService;
 import java.util.List;
@@ -28,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/agency")
-@CrossOrigin(origins = "http://localhost:3004")
+@CrossOrigin(origins = "http://localhost:3008")
 public class AgencyController {
     @Autowired 
     private AgencyService agencyService;
@@ -97,9 +98,15 @@ public class AgencyController {
     
     //Update Package of Id received from frontend
     @PutMapping("updatepackage/{packageId}")
-    public ApiResponse updatePackage(@RequestBody UpdatePackageRequest packageDTO,
+    public ResponseEntity<?> updatePackage(@RequestBody UpdatePackageRequest packageDTO,
     								 @PathVariable Long packageId) {
-    	agencyService.updatePackageDetails(packageDTO,packageId);
-    	return new ApiResponse("package updated successfully");
+    	return ResponseEntity.status(HttpStatus.CREATED).body(agencyService.updatePackageDetails(packageDTO,packageId));
     }  
+    
+    //harshada
+    @GetMapping("/viewpackage")
+	public ResponseEntity<List<ViewPackageForNameDTO>> getAllPackages() {
+        List<ViewPackageForNameDTO> packages = agencyService.getAllPackageByName();
+        return ResponseEntity.ok(packages);
+    }
 }

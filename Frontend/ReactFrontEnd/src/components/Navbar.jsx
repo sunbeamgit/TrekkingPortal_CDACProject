@@ -11,30 +11,39 @@ import AddTrek from './AddTrek'
 import AdminDashboard from './AdminDashboard';
 import DeleteAgency from './DeleteAgency'
 import AddPackage from './AddPackage';
+import AllPackages from './AllPackages'
 import ViewPackage from './ViewPackage';
 import AboutUs from './AboutUs';
-import Details from './Details'
 import Booking from './Booking';
 import PaymentDetails from './PaymentDetails';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import AgencyDashboard from './AgencyDashboard';
+import ViewDetails from './ViewDetails';
+import TrekkerLogin from './TrekkerLogin';
+import UpdatePackage from './UpdatePackage';
+import UpdatePassword from './UpdatePassword';
+import ForgotPassword from './ForgotPassword';
+import ForgotPassword2 from './ForgotPassword2';
+import ForgotPassword3 from './ForgotPassword3'
+import "./navbar.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Navbar() {
+  const handleLogout=()=>{
+    console.log("logout handler");
+    sessionStorage.clear();
+  }
+
   return (
     <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-custom">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            
+        <ul class="navbar-nav" className="navbar-nav ml-auto">
             <li class="nav-item">
-                <Link to="/alltreks" className="nav-link">All Treks</Link>
+                <Link to="/allpackages" className="nav-link">All Treks</Link>
             </li>
             
             <li class="nav-item">
@@ -68,19 +77,33 @@ function Navbar() {
                 <Link to="/trekker" class="dropdown-item">Trekker</Link>
                 </div>
             </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Profile
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <Link to="/updatepassword" class="dropdown-item">Change Password</Link>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <Link to="/logout" className="nav-link"
+                onClick={handleLogout}>Logout</Link>
+            </li>  
         </ul>
         </div>
         </nav>
       
       <Switch>
-       <Route exact path="/agency" component={AgencySignUp} />
+        <Route exact path="/agency" component={AgencySignUp} />
         <Route exact path="/agencylogin" component={AgencyLogin}/>
         <Route exact path="/agencydashboard" component={AgencyDashboard}/>
-
         <Route exact path="/contactus" component={ContactUs} />
         <Route exact path="/admin" component={AdminLogin} />
         <Route exact path="/trekker" component={TrekkerSignUp} />
         <Route exact path="/alltreks" component={AllTreks} />
+        <Route exact path="/allpackages" component={AllPackages} />
         <Route exact path="/adminlogin" component={AdminLogin} />
         <Route exact path="/addtrek" component={AddTrek} />
         <Route exact path="/admindashboard" component={AdminDashboard} />
@@ -88,9 +111,16 @@ function Navbar() {
         <Route exact path="/addpackage" component={AddPackage} />
         <Route exact path="/viewpackages" component={ViewPackage} />   
         <Route exact path="/aboutus" component={AboutUs} /> 
-        <Route exact path="/viewdetails/:id" component={Details} />
+        <Route exact path="/viewdetails/:id" component={ViewDetails} />
         <Route exact path="/getbookings/:id" component={Booking} />
+        <Route exact path="/trekkerlogin" component={TrekkerLogin} />
+        <Route path="/agency/updatepackage/:packageId" component={UpdatePackage} />
         <Route exact path="/paymentdetails/:payment/:no" component={PaymentDetails} />
+        
+        <Route exact path="/updatepassword" component={UpdatePassword}/>
+        <Route exact path="/forgotpassword" component={ForgotPassword}/>
+        <Route exact path="/forgotpassword2" component={ForgotPassword2}/>
+        <Route exact path="/forgotpassword3" component={ForgotPassword3}/>
       </Switch>
     </div>
   );

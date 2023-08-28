@@ -1,23 +1,28 @@
 package com.app.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import org.apache.commons.io.FileUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dao.CityRepository;
 import com.app.dao.CountryRepository;
 import com.app.dao.PackageRepository;
 import com.app.dao.StateRepository;
 import com.app.dao.TrekDetailsRepository;
 import com.app.dao.TrekkerRespository;
-import com.app.dto.AuthRequest;
-import com.app.dto.AuthResp;
 import com.app.dto.BookPack;
+import com.app.dto.ChangePasswordResponse;
 import com.app.dto.TrekkerSignUpRequest;
 import com.app.dto.TrekkerSignUpResponse;
+import com.app.dto.TrekkerSigninRequest;
+import com.app.dto.TrekkerSigninResp;
+import com.app.dto.ViewDetailsResponse;
 import com.app.pojos.City;
 import com.app.pojos.Country;
 import com.app.pojos.State;
@@ -50,35 +55,7 @@ public class TrekkerServiceImpl implements TrekkerService{
     
     @Autowired
     private PackageRepository packageRepo;
-
-//	@Override
-//	public String addTrekkerDetails(Trekker trekker) {
-//		 // Retrieve City by name from the repository
-//        City city = cityRepo.findByCityName(trekker.getCity().getCityName());
-//        if (city == null) {
-//            return "City not found";
-//        }
-//        trekker.setCity(city);
-//
-//        // Retrieve State by name from the repository
-//        State state = stateRepo.findByStateName(trekker.getState().getStateName());
-//        if (state == null) {
-//            return "State not found";
-//        }
-//        trekker.setState(state);
-//
-//        // Retrieve Country by name from the repository
-//        Country country = countryRepo.findByCountryName(trekker.getCountry().getCountryName());
-//        if (country == null) {
-//            return "Country not found";
-//        }
-//        trekker.setCountry(country);
-//
-//        Trekker persistentTrekker = trekkerRepo.save(trekker);
-//        return "User registered with ID " + persistentTrekker.getId();
-//		
-//	}
-    
+ 
     @Override
 	public TrekkerSignUpResponse addTrekkerDetails(TrekkerSignUpRequest trekkerDTO) {
 		System.out.println(trekkerDTO.getCityName());
@@ -90,15 +67,45 @@ public class TrekkerServiceImpl implements TrekkerService{
 		trekkerToAdd.setCity(city);
 		trekkerToAdd.setState(state);
 		trekkerToAdd.setCountry(country);
-		Trekker persistentAgency = trekkerRepo.save(trekkerToAdd);
-		return mapper.map(persistentAgency, TrekkerSignUpResponse.class);
+		Trekker persistentTrekker = trekkerRepo.save(trekkerToAdd);
+		TrekkerSignUpResponse signupresp = new TrekkerSignUpResponse();
+        if(persistentTrekker!= null) {
+        	signupresp.setStatus(true);
+        }
+        else {
+        	signupresp.setStatus(false);
+        }
+        return signupresp;
 	}
 	
 	//SignIn for Trekker
+    @Override
+	public TrekkerSigninResp singInTrekker(TrekkerSigninRequest request) {
+		Trekker trekker = trekkerRepo.findByEmailAndPassword(request.getEmail(), request.getPassword()).orElseThrow(() -> new ResourceNotFoundException("Invalid Email or Password"));
+		return mapper.map(trekker, TrekkerSigninResp.class);
+	}
+	
 	@Override
-	public AuthResp singInEmployee(AuthRequest request) {
-		Trekker trekker = trekkerRepo.findByEmailAndPassword(request.getEmail(), request.getPassword()).orElseThrow();
-		return mapper.map(trekker, AuthResp.class);
+	public ViewDetailsResponse showPackageDetails(Long id) {
+		TrekPackage packageDetails = packageRepo.findById(id).orElseThrow();
+		ViewDetailsResponse viewDetails = new ViewDetailsResponse();
+		mapper.map(packageDetails, viewDetails);
+		TrekDetails trekDetails = packageDetails.getTrekDetails();
+		mapper.map(trekDetails, viewDetails);
+		viewDetails.setAirport(packageDetails.getTrekDetails().getAirport().getAirportName());
+		viewDetails.setRailwayStation(packageDetails.getTrekDetails().getRailwayStation().getRailwaystationName());
+		viewDetails.setSeason(packageDetails.getTrekDetails().getSeason().getSeasonName());
+		viewDetails.setGrade(packageDetails.getTrekDetails().getGrade().getGradeCategory());
+		
+	    if (packageDetails.getTrekDetails().getImagePath() != null) {
+	    try {
+	       byte[] imageBytes = FileUtils.readFileToByteArray(new File(packageDetails.getTrekDetails().getImagePath()));
+	       viewDetails.setImagePath(imageBytes);
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+	    }
+	    return viewDetails;
 	}
 	
 	//Update profile for Trekker
@@ -107,35 +114,27 @@ public class TrekkerServiceImpl implements TrekkerService{
 	    Trekker newTrekker = trekkerRepo.findById(Id)
 	            .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-	    
-	    if(trekker.getState().getStateName() != null)
-	    {
+	    if(trekker.getState().getStateName() != null){
 	    	State newState=stateRepo.findByStateName(trekker.getState().getStateName());
 	    	newTrekker.setState(newState);
-	    }
-	    else {
+	    }else {
 	    	newTrekker.setFirstname(trekker.getFirstname());
     	    newTrekker.setLastname(trekker.getLastname());
     	    newTrekker.setBirthDate(trekker.getBirthDate());
     	    newTrekker.setMobileno(trekker.getMobileno());
-	    	
 	    }
 	    
-	    if(trekker.getCity().getCityName()!=null)
-	    {
+	    if(trekker.getCity().getCityName()!=null){
 	    	City newCity=cityRepo.findByCityName(trekker.getCity().getCityName());
 	    	newTrekker.setCity(newCity);
-	    }
-	    else {
+	    }else {
 	    	newTrekker.setFirstname(trekker.getFirstname());
     	    newTrekker.setLastname(trekker.getLastname());
     	    newTrekker.setBirthDate(trekker.getBirthDate());
     	    newTrekker.setMobileno(trekker.getMobileno());
-	    	
 	    }
 	    
-	    if(trekker.getCountry().getCountryName()!=null)
-	    {
+	    if(trekker.getCountry().getCountryName()!=null){
 	    	Country newCountry=countryRepo.findByCountryName(trekker.getCountry().getCountryName());
 	    	newTrekker.setCountry(newCountry);
 	    }
@@ -143,25 +142,13 @@ public class TrekkerServiceImpl implements TrekkerService{
 	    	newTrekker.setFirstname(trekker.getFirstname());
     	    newTrekker.setLastname(trekker.getLastname());
     	    newTrekker.setBirthDate(trekker.getBirthDate());
-    	    newTrekker.setMobileno(trekker.getMobileno());
-	    	
+    	    newTrekker.setMobileno(trekker.getMobileno());	
 	    }
 	    return trekkerRepo.save(newTrekker);
-	
-
 	}
 
 		@Override
-		public TrekPackage showPackageDetails(Long id) {
-			TrekPackage packageDetails=packageRepo.findById(id).orElseThrow();
-			return packageDetails;
-		}
-
-		@Override
-		public BookPack shoeBookedPack(Long id) {
-//			Packages bk=packageRepo.findById(mapper.map(id, Packages.class));
-//			return mapper.map(bk, BookPack.class);;
-			
+		public BookPack showBookedPack(Long id) {
 			 Optional<TrekPackage> packageOptional = packageRepo.findById(id);
 			    if (packageOptional.isPresent()) {
 			    	TrekPackage bk = packageOptional.get();
@@ -176,14 +163,21 @@ public class TrekkerServiceImpl implements TrekkerService{
 			int noInt=Integer.parseInt(no);
 			int paymentdetails=paymentInt * noInt;
 			return paymentdetails;
+		}	
+		
+		@Override
+		public String changepassword(ChangePasswordResponse response) {
+			Trekker trekker = trekkerRepo.findByEmail(response.getEmail());
+			
+			if(response.getPassword().equals(trekker.getPassword()))
+			{
+				trekker.setPassword(response.getNewPassword());
+				trekkerRepo.save(trekker);
+				return("Password change successfully!");
+			}
+			else
+			{
+				return("Old password is incorrect");
+			}
 		}
-
-		
-		
-
-
-		
-	
-	
-	
 }

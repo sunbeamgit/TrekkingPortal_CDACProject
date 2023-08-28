@@ -9,34 +9,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.app.dto.GetAirportResponse;
+import com.app.dto.GetAllPackageResponse;
 import com.app.dto.GetCityResponse;
 import com.app.dto.GetCountryResponse;
 import com.app.dto.GetGradeResponse;
+import com.app.dto.GetGuideResponse;
 import com.app.dto.GetPartialTrekResponse;
 import com.app.dto.GetSeasonResponse;
 import com.app.dto.GetStateResponse;
 import com.app.dto.GetStationResponse;
+import com.app.dto.GetTrekImageResponse;
+import com.app.dto.GetTrekNameResponse;
+import com.app.dto.ViewPackageForNameDTO;
 import com.app.pojos.BaseEntity;
 import com.app.service.HomeService;
 
 @RestController
 @RequestMapping("/home")
-@CrossOrigin(origins = "http://localhost:3004")
+@CrossOrigin(origins = "http://localhost:3008")
 public class HomeController extends BaseEntity{
 	@Autowired 
     private HomeService homeService;
 	
-//	@GetMapping("/about")
-//	public Admin showAboutPage(Long val) {
-//		System.out.println("in new admin");
-//		
-//		return homeService.showAdminDetails();
-//	}
-
 	//Get Partial Trek Data
 	@GetMapping(value = "/getpartialdata")
 	public ResponseEntity<?> getPartialTrek() throws IOException{
 		List<GetPartialTrekResponse> treks = homeService.getPartialTrekDetails();
+	    return ResponseEntity.ok(treks);
+	}
+	
+	@GetMapping(value = "/getallpackage")
+	public ResponseEntity<?> getAllPackage() throws IOException{
+		List<GetAllPackageResponse> treks = homeService.getAllPackageDetails();
 	    return ResponseEntity.ok(treks);
 	}
 	
@@ -90,5 +94,26 @@ public class HomeController extends BaseEntity{
 	public ResponseEntity<?> getGrade(){
 		GetGradeResponse grade= homeService.getGradeDetails();
 	    return ResponseEntity.ok(grade);
+	}
+	
+	@GetMapping("/getpackagename")
+	public ResponseEntity<?> getPackageName()
+	{
+		List<ViewPackageForNameDTO> packageName = homeService.getPackageByName();
+		return ResponseEntity.ok(packageName);
+	}
+	
+	@GetMapping("/getTrek")
+	public ResponseEntity<?> getTrekName()
+	{
+		List<GetTrekNameResponse> trekName = homeService.getTrekbyName();
+		return ResponseEntity.ok(trekName);
+	}
+	
+	@GetMapping("/getGuide")
+	public ResponseEntity<?> getGuideName()
+	{
+		List<GetGuideResponse> guideName = homeService.getGuideName();
+		return ResponseEntity.ok(guideName);
 	}
 }
