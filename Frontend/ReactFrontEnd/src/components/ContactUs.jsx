@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
-import contactus from "../images/contactus.jpeg";
 
 function ContactUs() {
   const [packageData, setPackageData] = useState({ teams: [] });
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/admin/about')
+      .get('http://localhost:7070/home/about')
       .then(response => {
         setPackageData(response.data);
         console.log(response.data);
@@ -20,11 +19,15 @@ function ContactUs() {
 
   return (
     <div className="container">
-      <div className="background-image2" style={{ height: '700px' }}>
+      <div className="contactus-img ">
+          <center> <br /><br /><br /><br />
+          <div className="main-heading">Contact Us</div>
+          </center>
+        </div>
+        <br /><br /><br /><br />
+      <div >
         <center>
-          <div className="main-heading">Trek Maharashtra</div><br /><br />
-          <div className="sub-heading">Contact Us</div><br />
-          <table className="my-table1">
+        <table className="my-table1">
             <tr>
               <td>
                 <div>
@@ -35,8 +38,12 @@ function ContactUs() {
                   </center>
                 </div>
               </td>
-              <td>
-                <div><img className="my-image2" src={contactus} alt="Contact Us" /></div>
+              <td> <center>
+              <div className="contactus-img2">
+                </div>
+              </center>
+                
+              
               </td>
             </tr>
           </table>

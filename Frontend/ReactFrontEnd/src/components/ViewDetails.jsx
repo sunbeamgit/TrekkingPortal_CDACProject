@@ -20,7 +20,6 @@ function ViewDetails({ match }) {
     }, [match.params.id]);
 
     const handlebooking = packageId => {
-        debugger;
         history.push(`/getbookings/${packageData?.id}`);
       };
 

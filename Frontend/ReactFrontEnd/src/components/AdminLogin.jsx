@@ -11,7 +11,7 @@ function AdminLogin()
         
     useEffect(()=>{
       const checkAdminLoggedIn = window.sessionStorage.getItem("isAdminLoggedIn");
-      setIsAdminLoggedIn(checkAdminLoggedIn === 'true');;
+      setIsAdminLoggedIn(checkAdminLoggedIn === 'true');
     },[])
 
     var OnTextChanged = (args)=>{
@@ -45,47 +45,56 @@ function AdminLogin()
     };
   
     if(!isAdminLoggedIn){
-    return (
-    <div className="container">
-      <div className="row justify-content-center">
-          <div className="col-md-6">
-            <form>
-              <div className="form-outline mb-4">
-                <input 
-                  type="email" 
-                  id="form2Example1"
-                  className="form-control" 
-                  value={credentials.email}
-                  name="email"
-                  onChange={OnTextChanged}
-                />
-                <label className="form-label" htmlFor="form2Example1">Email address</label>
+      return (
+        <div className="container">
+           <div className="adminlogin-img ">
+              <center> <br /><br /><br /><br /> <br />
+              <div className="main-heading">Admin Login</div>
+              </center>
               </div>
+              <br />
+              <hr />
+          <div className="row justify-content-center">
+              <div className="col-md-6">
+                <form>
+                  <div className="form-outline mb-4">
     
-              <div className="form-outline mb-4">
-                <input 
-                  type="password" 
-                  id="form2Example2" 
-                  className="form-control" 
-                  value={credentials.password}
-                  name="password"
-                  onChange={OnTextChanged}
-                />
-                <label className="form-label" htmlFor="form2Example2">Password</label>
+                  <label className="form-label" htmlFor="form2Example1" style={{ color: 'black', fontWeight: 'bold' }}>Email address</label>
+                    <input 
+                      type="email" 
+                      id="form2Example1"
+                      className="form-control" 
+                      value={credentials.email}
+                      name="email"
+                      onChange={OnTextChanged}
+                    />
+                  </div>
+        
+                  <div className="form-outline mb-4">
+                  <label className="form-label" htmlFor="form2Example2" style={{ color: 'black', fontWeight: 'bold' }}>Password</label>
+                    <input 
+                      type="password" 
+                      id="form2Example2" 
+                      className="form-control" 
+                      value={credentials.password}
+                      name="password"
+                      onChange={OnTextChanged}
+                    />
+                   
+                  </div>
+                  <button type="button" 
+                    className="btn btn-primary btn-block mb-4"
+                    onClick={signIn}
+                  >Sign in</button>
+                </form>
               </div>
-              <button type="button" 
-                className="btn btn-primary btn-block mb-4"
-                onClick={signIn}
-              >Sign in</button>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
-      );
-    }
-    else{
-      history.push("/AdminDashboard")
-    }
+          );
+        }
+        else{
+          history.push("/AdminDashboard")
+        }
   }
     
 export default AdminLogin;

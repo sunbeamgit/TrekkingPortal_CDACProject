@@ -67,10 +67,19 @@ function AgencySignUp() {
 
   return (
     <div>
-      <form style={{width:"50%",left:"450px",boxShadow:"10px 10px 10px 5px grey",padding:"20px",marginTop:"10px"}}>
+        <div className="agencysignup-img ">
+          <center> <br /><br /><br /><br /> <br />
+          <div className="main-heading">Agency SignUp</div>
+          </center>
+          </div>
+          <br />
+          <hr />
+          <br />
+          <center>
+          <form style={{width:"50%",left:"450px",boxShadow:"10px 10px 10px 5px grey",padding:"20px",marginTop:"10px"}}>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="inputAgencyName">Agency Name</label>
+            <label htmlFor="inputAgencyName" style={{ color: 'red', fontWeight: 'bold' }}>Agency Name</label>
             <input type="text" 
             className="form-control" 
             id="agencyName"
@@ -82,7 +91,7 @@ function AgencySignUp() {
           </div>
 
           <div className="form-group col-md-6">
-            <label htmlFor="inputAgencyOwner">Agency Owner Name</label>
+            <label htmlFor="inputAgencyOwner" style={{ color: 'red', fontWeight: 'bold' }}>Agency Owner Name</label>
             <input type="text" 
             className="form-control" 
             id="agencyOwner" 
@@ -94,7 +103,7 @@ function AgencySignUp() {
           </div>
         
           <div className="form-group col-md-6">
-            <label htmlFor="inputEmail4">Email</label>
+            <label htmlFor="inputEmail4" style={{ color: 'red', fontWeight: 'bold' }}>Email</label>
             <input type="email" 
             className="form-control" 
             id="email" 
@@ -105,7 +114,7 @@ function AgencySignUp() {
           </div>
 
           <div className="form-group col-md-6">
-            <label htmlFor="inputPassword4">Password</label>
+            <label htmlFor="inputPassword4" style={{ color: 'red', fontWeight: 'bold' }}>Password</label>
             <input type="password" 
             className="form-control"
             id="password" 
@@ -119,7 +128,7 @@ function AgencySignUp() {
 
         <div className="form-row">
             <div className="form-group col-md-4">
-            <label htmlFor="inputCity">City</label>
+            <label htmlFor="inputCity" style={{ color: 'red', fontWeight: 'bold' }}>City</label>
             <select
                 id="inputCity"
                 name="cityName"
@@ -135,7 +144,7 @@ function AgencySignUp() {
             </div>
 
             <div className="form-group col-md-4">
-            <label htmlFor="inputState">State</label>
+            <label htmlFor="inputState" style={{ color: 'red', fontWeight: 'bold' }}>State</label>
             <select
                 id="inputState"
                 name="stateName"
@@ -152,7 +161,7 @@ function AgencySignUp() {
 
 
             <div className="form-group col-md-4">
-            <label htmlFor="inputState">Country</label>
+            <label htmlFor="inputState" style={{ color: 'red', fontWeight: 'bold' }}>Country</label>
             <select
                 id="inputCountry"
                 name="countryName"
@@ -184,6 +193,9 @@ function AgencySignUp() {
         </div>
         <button type="button" onClick={handleSubmit} className="btn btn-primary">Sign up</button>
       </form>
+          </center>
+          <br /><br />
+     
     </div>
   );
 }

@@ -29,7 +29,7 @@ function AllTreks() {
 
   return (
     <div className="container my-4">
-      <h2>We feel happy to help you</h2>
+      <h2>-------------------Trek Details----------------</h2>
       {trekdetails.map((trek, index) => (
         <div key={trek.trekName} className="row" style={{ border: "2px solid #b4b4b4", padding: "10px", borderRadius: "10px", width: "50%" }}>
           <div className="col-md-6">

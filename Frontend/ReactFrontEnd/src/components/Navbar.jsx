@@ -1,5 +1,6 @@
 import { Link, Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import AgencyLogin from './AgencyLogin';
 import ContactUs from './ContactUs'
 import React from 'react'; 
@@ -24,13 +25,17 @@ import UpdatePassword from './UpdatePassword';
 import ForgotPassword from './ForgotPassword';
 import ForgotPassword2 from './ForgotPassword2';
 import ForgotPassword3 from './ForgotPassword3'
+import ViewBookings from './ViewBookings';
+import Logout from './Logout';
 import "./navbar.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Navbar() {
+  const history = useHistory();
   const handleLogout=()=>{
     console.log("logout handler");
     sessionStorage.clear();
+    history.push("/logout")
   }
 
   return (
@@ -115,12 +120,15 @@ function Navbar() {
         <Route exact path="/getbookings/:id" component={Booking} />
         <Route exact path="/trekkerlogin" component={TrekkerLogin} />
         <Route path="/agency/updatepackage/:packageId" component={UpdatePackage} />
-        <Route exact path="/paymentdetails/:payment/:no" component={PaymentDetails} />
+        <Route exact path="/paymentdetails/:payment/:no/:packageDetailsId" component={PaymentDetails} />
         
         <Route exact path="/updatepassword" component={UpdatePassword}/>
         <Route exact path="/forgotpassword" component={ForgotPassword}/>
         <Route exact path="/forgotpassword2" component={ForgotPassword2}/>
         <Route exact path="/forgotpassword3" component={ForgotPassword3}/>
+        <Route exact path="/viewbookings" component={ViewBookings}/>
+
+        <Route exact path="/logout" component={Logout}/>
       </Switch>
     </div>
   );

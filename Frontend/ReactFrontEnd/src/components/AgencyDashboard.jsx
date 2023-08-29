@@ -42,6 +42,13 @@ function AgencyDashboard() {
           View Packages
         </Link>
       </div>
+
+      <br />
+      <div style={divStyle}>
+        <Link to="/viewbookings" className="nav-link" style={linkStyle}>
+          View Bookings
+        </Link>
+      </div>
     </div>
   );
 }

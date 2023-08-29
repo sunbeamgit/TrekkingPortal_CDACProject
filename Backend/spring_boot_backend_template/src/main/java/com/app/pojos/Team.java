@@ -1,12 +1,9 @@
 package com.app.pojos;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +14,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Team extends BaseEntity{
-	
 	@Column(name = "team_name", length = 30)
 	private String name;
 	
@@ -33,7 +29,4 @@ public class Team extends BaseEntity{
 	
 	@Column(name = "imag", length = 50)
 	private String imag;
-	
-	
-
 }

@@ -18,6 +18,7 @@ import com.app.dao.TrekDetailsRepository;
 import com.app.dao.TrekkerRespository;
 import com.app.dto.BookPack;
 import com.app.dto.ChangePasswordResponse;
+import com.app.dto.GetTrekkerIdByEmailRequest;
 import com.app.dto.TrekkerSignUpRequest;
 import com.app.dto.TrekkerSignUpResponse;
 import com.app.dto.TrekkerSigninRequest;
@@ -155,6 +156,13 @@ public class TrekkerServiceImpl implements TrekkerService{
 			        return mapper.map(bk, BookPack.class);
 			    }
 			    return null; 
+		}
+		
+		@Override
+		public Long findTrekkerIdByEmail(GetTrekkerIdByEmailRequest dtobj) {
+			System.out.println(dtobj.getEmail());
+			Trekker trekker = trekkerRepo.findByEmail(dtobj.getEmail());
+			return trekker.getId();
 		}
 
 		@Override

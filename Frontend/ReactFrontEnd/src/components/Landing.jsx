@@ -8,7 +8,7 @@ function Landing() {
     <div className='main-container'>
       <Header/>
       <Navbar></Navbar>
-      {/* <Footer/> */}
+      <Footer/>
     </div>
   );
 }

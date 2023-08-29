@@ -79,11 +79,11 @@
 
 .my-table1 {
   width: 950px;
-  height: 300px;
+  height: 250px;
   border-collapse: collapse;
-  border: 1px solid #ddd;
+  border: 1px solid #a6a6a6;
   align-items: center;
-  background-color: #e1e1e1;
+  background-color: #ffffff;
 }
 
 .div-imagepng{
@@ -106,7 +106,7 @@
 .my-div1{
   width: 70%;
   height: 360px;
-  background-color: #f68c8c;
+  background-color: #d8d8d8;
   border: 1px solid #ddd;
   padding: 20px;
   margin: 10px;
@@ -121,14 +121,16 @@
 }
 
 .main-heading {
-  color: #cf2102; /* Reddish color code */
-  font-size: 32px; /* Adjust the font size as needed */
+  color: #ffffff; /* Reddish color code */
+  font-size: 46px; /* Adjust the font size as needed */
   font-weight: bold;
+  font-style: italic;
 }
 .sub-heading{
-  color: #bf1d00; /* Reddish color code */
-  font-size: 18px; /* Adjust the font size as needed */
+  color: #000000; /* Reddish color code */
+  font-size: 24px; /* Adjust the font size as needed */
   font-weight: bold;
+  font-style: inherit;
 }
 
 /* Basic styling */
@@ -163,9 +165,177 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #d9d9d9; /* Parallelogram background color */
+  background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/footerimag2.jpg');
+  background-size: cover; /* Adjust how the image covers the element */
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-position-y: center; }
 
-  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 70px);  /* Clip-path to create the shape */ }
+  .contactus-img {
+    flex-shrink: 0;
+    padding: 10px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/contactheader.jpg');
+    background-size: cover; /* Adjust how the image covers the element */
+    background-repeat: no-repeat;
+    background-position: 10px;
+    background-position-y: center; }
+
+    .agencylogin-img {
+      flex-shrink: 0;
+      padding: 10px;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 400px;
+      background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/6522932.jpg');
+      background-size: cover; /* Adjust how the image covers the element */
+      background-repeat: no-repeat;
+      background-position: 10px;
+      background-position-y: center; }
+
+      .updatepass-img {
+        flex-shrink: 0;
+        padding: 10px;
+        bottom: 0;
+        left: 0;
+        width: 70%;
+        height: 400px;
+        background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/fort-6055054_1920.jpg');
+        background-size: cover; /* Adjust how the image covers the element */
+        background-repeat: no-repeat;
+        background-position: 10px;
+        background-position-y: bottom; 
+        background-position-y: -250px; 
+      }
+
+      .adminlogin-img {
+        flex-shrink: 0;
+        padding: 10px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 400px;
+        background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/6522945.jpg');
+        background-size: cover; /* Adjust how the image covers the element */
+        background-repeat: no-repeat;
+        background-position: 10px;
+        background-position-y: center; }
+
+        .agencysignup-img {
+          flex-shrink: 0;
+          padding: 10px;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 400px;
+          background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/6522923.jpg');
+          background-size: cover; /* Adjust how the image covers the element */
+          background-repeat: no-repeat;
+          background-position: 10px;
+          background-position-y: center; }
+
+          .trekkersignup-img {
+            flex-shrink: 0;
+            padding: 10px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 400px;
+            background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/wallpaperflare.com_wallpaper.jpg');
+            background-size: cover; /* Adjust how the image covers the element */
+            background-repeat: no-repeat;
+            background-position: 10px;
+            background-position-y: center; }
+  
+      .trekkerlogin-img {
+        flex-shrink: 0;
+        padding: 10px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 400px;
+        background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/abhijeet-gaikwad-mpm6_ZyuC88-unsplash.jpg');
+        background-size: cover; /* Adjust how the image covers the element */
+        background-repeat: no-repeat;
+        background-position: 10px;
+        background-position-y: center;
+      
+  background-position-y: -350px; }
+
+    /* .allpackages-img {
+      flex-shrink: 0;
+      padding: 10px;
+      bottom: 0;
+      left: 0;
+      width: 60%;
+      height: 400px;
+      background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/6522916(1).jpg');
+      background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0px center; /* Horizontal alignment is center
+  background-position-y: -230px;} */
+
+  .allpackages-img {
+    padding: 10px;
+    width: 100%;
+    height: 750px;
+    background-image: url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/6522916(1).jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .allpackages-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+.aboutus-img {
+  flex-shrink: 0;
+  padding: 10px;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  height: 400px;
+  background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/6522947.jpg');
+  background-size: cover;
+background-repeat: no-repeat;
+background-position: 0px center; /* Horizontal alignment is center */
+background-position-y: -230px;
+}
+
+.booknow-img {
+  flex-shrink: 0;
+  padding: 10px;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  height: 400px;
+  background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/6522947.jpg');
+  background-size: cover;
+background-repeat: no-repeat;
+background-position: 0px center; /* Horizontal alignment is center */
+background-position-y: -230px;
+}
+
+.contactus-img2{
+
+  flex-shrink: 0;
+  padding: 10px;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  height: 230px;
+  background-image:  url('/home/shweta_ubuntu/SUNBEAM2023/Project/GIT REPO/TrekkingPortal_CDACProject/Frontend/ReactFrontEnd/src/images/burst-kUqqaRjJuw0-unsplash.jpg');
+  background-size: cover;
+background-repeat: no-repeat;
+background-position: 0px center; /* Horizontal alignment is center */
+}
 
   .footer-heading{
     color: #060606; /* Reddish color code */

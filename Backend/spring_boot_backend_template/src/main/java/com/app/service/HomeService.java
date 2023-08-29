@@ -14,6 +14,8 @@ import com.app.dto.GetStateResponse;
 import com.app.dto.GetStationResponse;
 import com.app.dto.GetTrekNameResponse;
 import com.app.dto.ViewPackageForNameDTO;
+import com.app.pojos.Home;
+import com.app.pojos.Team;
 
 public interface HomeService {
 	List<GetPartialTrekResponse> getPartialTrekDetails() throws IOException;
@@ -31,4 +33,9 @@ public interface HomeService {
 	List<ViewPackageForNameDTO> getPackageByName();
 	List<GetTrekNameResponse> getTrekbyName();
 	List<GetGuideResponse> getGuideName();
+	
+	
+	//show all teams info
+		List<Team> showAllTeamInfo();
+		Home showAdminDetails();
 }

@@ -2,6 +2,7 @@ package com.app.service;
 
 import com.app.dto.BookPack;
 import com.app.dto.ChangePasswordResponse;
+import com.app.dto.GetTrekkerIdByEmailRequest;
 import com.app.dto.TrekkerSignUpRequest;
 import com.app.dto.TrekkerSignUpResponse;
 import com.app.dto.TrekkerSigninRequest;
@@ -32,5 +33,7 @@ public interface TrekkerService {
 	
 	//change password 
 	String changepassword(ChangePasswordResponse response);
+	
+	Long findTrekkerIdByEmail(GetTrekkerIdByEmailRequest dtoobj);
 	
 }
