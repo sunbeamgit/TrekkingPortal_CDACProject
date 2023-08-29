@@ -88,7 +88,6 @@ function AddTrek() {
   }
 
     return (
-    <div>
       <form style={{width:"50%",left:"450px",boxShadow:"10px 10px 10px 5px grey",padding:"20px",marginTop:"10px"}}>
         <div className="form-row">
           <div className="form-group col-md-6">
@@ -262,7 +261,6 @@ function AddTrek() {
         </div>
         <button type="button" onClick={handleSubmit} className="btn btn-primary">Add Trek</button>
       </form>
-    </div>
   );
 }
 

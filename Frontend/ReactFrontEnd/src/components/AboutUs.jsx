@@ -11,7 +11,7 @@ function AboutUs() {
   
   useEffect(() => {
     axios
-      .get('http://localhost:8080/admin/about')
+      .get('http://localhost:7070/home/about')
       .then(response => {
         setPackageData(response.data);
         console.log(response.data);
@@ -23,24 +23,19 @@ function AboutUs() {
 
   return (
     <div>
+      <center>
+      <div className="aboutus-img">
+      <center> <br /><br /><br /><br /> <br />
+          <div className="main-heading">About Us</div>
+          </center>
+      </div>
+      </center>
+
       <div align="center">
         <div className="my-div1">
           <div className="redish-heading">Maharashtra Trekking</div><br />
           <div className="justify-paragraph">
-            {packageData.info} Maharashtra, India, is a paradise for fort trekking aficionados. 
-            Its diverse landscape offers an array of historic and scenic forts to explore. The Sahyadri
-            mountain range hosts iconic treks like Harishchandragad, famous for its ancient caves, and 
-            Rajmachi with its twin forts, showcasing architectural marvels. In the Western Ghats,
-            Bhimashankar offers a spiritual trek amidst lush forests, while Kalsubai, Maharashtra's 
-            highest peak, promises breathtaking views. 
-            The Konkan coast reveals Torna Fort's historical charm 
-            and Ratangad's captivating beauty. Kokan's Tung Fort entices with misty vistas, and Pratapgad resonates 
-            with Maratha history. Lonavala-Khandala boasts Lohagad and Visapur Forts for history buffs. Adventure seekers
-            find solace at Duke's Nose for rock climbing. Matheran unfolds serene treks to Panorama Point. Prepare for diverse 
-            terrain, varying difficulty levels, and changing weather conditions. Respect nature, stay hydrated, and 
-            adhere to guidelines. Local guides or trekking groups enhance safety and provide insights into 
-            Maharashtra's history and culture. Maharashtra's forts stand as testimonials to its rich heritage, 
-            inviting trekkers to embark on unforgettable journeys.
+            {packageData.corevalue}
           </div>
         </div>
 
@@ -75,13 +70,7 @@ function AboutUs() {
         <div className="my-div1">
           <div className="redish-heading"><b>Core Value</b></div><br />
           <div className="justify-paragraph">
-            {packageData.corevalue}We are committed to providing thrilling and memorable adventures while 
-            prioritizing the safety of our clients and the environment. Sustainability is integral to our 
-            operations as we strive to minimize our impact on nature. We uphold a standard of excellence in 
-            service and experiences, ensuring every trek is exceptional. Fostering a sense of community, we 
-            create connections among trekkers, guides, and local communities, promoting cultural understanding 
-            and mutual respect. These values drive us to deliver exceptional treks that combine adventure, 
-            safety, sustainability, excellence, and community engagement.
+          {packageData.info} 
           </div> 
         </div>
       </div>

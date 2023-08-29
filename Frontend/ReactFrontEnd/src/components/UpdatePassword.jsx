@@ -49,30 +49,45 @@ function UpdatePassword(){
     return(
         <div>
             <center>
+            <div className="updatepass-img ">
+          <center> <br /><br /><br /><br /> <br />
+          <div className="main-heading">Change Password</div>
+          </center>
+          </div>
+          <br />
+          <hr />
+          <br />
+            </center>
+             
+            <center>
             <div className='my-div1'>
                 <table align='center'>
                     <tr>
                         <td>
-                            Email <br />
+                            <b style={{ color: 'red', fontWeight: 'bold' }}> Email</b> <br />
                             <input type="text" value={email} id="email" onChange={e => setEmail(e.target.value)}/>
                         </td>
                      </tr>
+                     <br />
                      <tr>
                         <td>
-                            Old Password <br />
+                            <b style={{ color: 'red', fontWeight: 'bold' }}>Old Password</b> <br />
                             <input type="text" value={password} id="password" onChange={e => setPassword(e.target.value)}/>
                         </td>
                     </tr>
+                    <br />
                     <tr>
                         <td>
-                            New Password <br />
+                            <b style={{ color: 'red', fontWeight: 'bold' }}>New Password</b> <br />
                             <input type="text" value={newPassword} id="newPassword" onChange={e => setNewPassword(e.target.value)}/>
                         </td>
                     </tr>
+                    <br />
                     <tr>
-                        <td>
-                            <input type="submit" onClick={updatePassword} value="Update Password"/>
-                        </td>
+                       
+                       <center> <td>
+                            <input  className='btn-primary'type="submit" onClick={updatePassword} value="Update Password"/>
+                        </td></center>
                     </tr>
                 </table>
                 </div>
@@ -81,6 +96,6 @@ function UpdatePassword(){
             </center>
                       
         </div>
-    )
+    );
 }
 export default UpdatePassword;

@@ -22,11 +22,13 @@ import com.app.dto.GetTrekImageResponse;
 import com.app.dto.GetTrekNameResponse;
 import com.app.dto.ViewPackageForNameDTO;
 import com.app.pojos.BaseEntity;
+import com.app.pojos.Home;
+import com.app.pojos.Team;
 import com.app.service.HomeService;
 
 @RestController
 @RequestMapping("/home")
-@CrossOrigin(origins = "http://localhost:3008")
+@CrossOrigin(origins = "http://localhost:3004")
 public class HomeController extends BaseEntity{
 	@Autowired 
     private HomeService homeService;
@@ -115,5 +117,17 @@ public class HomeController extends BaseEntity{
 	{
 		List<GetGuideResponse> guideName = homeService.getGuideName();
 		return ResponseEntity.ok(guideName);
+	}
+	
+	@GetMapping("/team")
+	public List<Team> showallteam() {
+		System.out.println("in new admin");
+		return homeService.showAllTeamInfo();
+	}
+	
+	@GetMapping("/about")
+	public Home showAboutPage(Long val) {
+		System.out.println("in new admin");
+		return homeService.showAdminDetails();
 	}
 }

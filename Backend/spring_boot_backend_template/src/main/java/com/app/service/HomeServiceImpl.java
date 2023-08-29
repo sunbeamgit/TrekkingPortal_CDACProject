@@ -15,10 +15,12 @@ import com.app.dao.CityRepository;
 import com.app.dao.CountryRepository;
 import com.app.dao.GradeRepository;
 import com.app.dao.GuideRepository;
+import com.app.dao.HomeRepository;
 import com.app.dao.PackageRepository;
 import com.app.dao.RailwayStationRepository;
 import com.app.dao.SeasonRepository;
 import com.app.dao.StateRepository;
+import com.app.dao.TeamRepository;
 import com.app.dao.TrekDetailsRepository;
 import com.app.dao.TrekPackageRepository;
 import com.app.dto.GetAirportResponse;
@@ -39,9 +41,11 @@ import com.app.pojos.City;
 import com.app.pojos.Country;
 import com.app.pojos.Grade;
 import com.app.pojos.Guide;
+import com.app.pojos.Home;
 import com.app.pojos.RailwayStation;
 import com.app.pojos.Season;
 import com.app.pojos.State;
+import com.app.pojos.Team;
 import com.app.pojos.TrekDetails;
 import com.app.pojos.TrekPackage;
 
@@ -83,6 +87,11 @@ public class HomeServiceImpl implements HomeService{
     
     @Autowired
 	private PackageRepository packageRepo;
+    
+    @Autowired
+    private TeamRepository teamRepo;
+    
+    @Autowired HomeRepository homeRepo;
     
     @Override
     public List<GetPartialTrekResponse> getPartialTrekDetails() throws IOException {
@@ -256,5 +265,17 @@ public class HomeServiceImpl implements HomeService{
 			return response;
 		})
 				.collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<Team> showAllTeamInfo() {
+		List<Team> teams=teamRepo.findAll();
+		return teams;
+	}
+	
+	@Override
+	public Home showAdminDetails() {
+		Home newhome=homeRepo.findAll().get(0);
+		return newhome;
 	}
 }

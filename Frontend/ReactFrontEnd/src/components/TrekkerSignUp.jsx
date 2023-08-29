@@ -67,7 +67,15 @@ function TrekkerSignUp() {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <div>
+       <div className="trekkersignup-img ">
+          <center> <br /><br /><br /><br /> <br />
+          <div className="main-heading">Trekker SignUp</div>
+          </center>
+          </div>
+          <hr />
+         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      
       <form style={{ width: '50%', boxShadow: '10px 10px 10px 5px grey', padding: '20px', marginTop: '10px' }}>
         <div className="form-row">
           <div className="form-group col-md-6">
@@ -220,6 +228,7 @@ function TrekkerSignUp() {
         </div>
         <button type="button" onClick={handleSubmit} className="btn btn-primary">Sign up</button>
       </form>
+    </div>
     </div>
   );
 }

@@ -1,12 +1,57 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 function PaymentDetails() {
-  const { payment, no } = useParams();
+  const { payment, no ,packageDetailsId} = useParams();
+  const history = useHistory();
+  const [trekkerid,setTrekkerid] = useState();
+  const [isTrekkerLoggedIn,setIsTrekkerLoggedIn]=useState(false);
   const totalPayment = parseInt(payment) * parseInt(no);
+
+  useEffect(()=>{
+    const checkTrekkerLoggedIn = window.sessionStorage.getItem("isTrekkerLoggedIn");
+    setIsTrekkerLoggedIn(checkTrekkerLoggedIn === 'true');
+    if(isTrekkerLoggedIn == true){
+      const trekkerEmail = window.sessionStorage.getItem("trekkeremail");
+
+      const requestData = {
+        email: trekkerEmail,
+      };
+
+      axios.post('http://localhost:7070/trekker/gettrekkerid', requestData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => {
+          const result = response.data;
+          console.log(result)
+          setTrekkerid(result);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+  })
 
   const handleClick=()=>{
     console.log("Inside payment onlick");
 
+    axios.put(`http://localhost:7070/trekker/insertbooking/${trekkerid}/${packageDetailsId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => {
+          const result = response.data;
+          console.log(result);
+          history.push("/allpackages")
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
   }
 
   return (

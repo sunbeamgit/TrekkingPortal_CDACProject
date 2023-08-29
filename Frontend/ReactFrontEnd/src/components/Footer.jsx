@@ -6,7 +6,7 @@ function Footer(){
     const [packageData,setPackageData]=useState({ teams: [] });;
         useEffect(() => {
             axios
-              .get('http://localhost:8080/admin/about')
+              .get('http://localhost:7070/home/about')
               .then(response => {
                 setPackageData(response.data);
                 console.log(response.data);

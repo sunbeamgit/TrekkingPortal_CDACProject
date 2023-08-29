@@ -3,6 +3,7 @@ package com.app.controller;
 import com.app.dto.AddPackageRequest;
 import com.app.dto.AgencyListResponse;
 import com.app.dto.ApiResponse;
+import com.app.dto.GetBookingDetailsResponse;
 import com.app.dto.GetPackageResponse;
 import com.app.dto.GetTrekNameResponse;
 import com.app.dto.SignInRequest;
@@ -12,6 +13,8 @@ import com.app.dto.UpdatePackageRequest;
 import com.app.dto.ViewPackageForNameDTO;
 import com.app.pojos.Guide;
 import com.app.service.AgencyService;
+import com.app.service.BookingService;
+
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +32,13 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/agency")
-@CrossOrigin(origins = "http://localhost:3008")
+@CrossOrigin(origins = "http://localhost:3004")
 public class AgencyController {
     @Autowired 
     private AgencyService agencyService;
+    
+    @Autowired
+    private BookingService bookingService;
 
     public AgencyController() {
         System.out.println("in ctor of " + getClass());
@@ -102,6 +108,11 @@ public class AgencyController {
     								 @PathVariable Long packageId) {
     	return ResponseEntity.status(HttpStatus.CREATED).body(agencyService.updatePackageDetails(packageDTO,packageId));
     }  
+    
+    @GetMapping("/bookingdetails")
+    public List<GetBookingDetailsResponse> getBookingDetails() {
+    	return bookingService.listBookingDetails();
+    }
     
     //harshada
     @GetMapping("/viewpackage")
